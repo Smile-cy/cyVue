@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    canvas{border: 1px solid red}
+  </style>
+</head>
+<body>
+  <canvas width="600" height="400"></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx  = canvas.getContext('2d');
+    var grd = ctx.createLinearGradient(100,100,400,400);
+    grd.addColorStop(0,'yellow');
+    grd.addColorStop(1,'blue');
+    ctx.moveTo(100,100);
+    ctx.lineTo(100,300);
+    ctx.lineTo(300,300);
+    ctx.lineTo(300,100);
+    ctx.closePath();
+    ctx.fillStyle='20';
+    ctx.strokeStyle = grd;
+    ctx.stroke();
+    
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  nav{
+    background: red; 
+    display: block;
+    /* 将元素转化为块级元素 */
+    }
+  div{background: gray;}
+</style>
+<body>
+  <nav>自定义的标签</nav>
+  <div>正常的div</div>
+</body>
+<script>
+  // 第一种解决方案
+  document.createElement("nav");
+</script>
+<!-- 第二种解决方案：通过js插件 -->
+<script src='html5shiv.min.js'></script>
+<!-- 终极解决方案 [腻子程序]-->
+<!-- [if lte IE 8]>
+<script src='html5shiv.min.js'></script>
+<![endif] -->
+
+</html>

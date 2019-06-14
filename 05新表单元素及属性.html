@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  loop
+  <input type="email">
+  email：输入合法的邮箱地址
+  url：输入合法的网址
+  number：只能输入数字
+  range：滑块
+  color：拾色器
+  date：显示日期
+  month：显示月份
+  week：显示第几周
+  time：显示时间
+
+
+<form action="" autocomplete="off" novalidate = true></form>
+<!-- form表单属性 -->
+autocomplete   on\off  自动完成
+novalidate  true|false 是否关闭校验
+<!-- input属性 -->
+autofocus 自动获取焦点
+form 如果有个input在form表单单外面，但是要用from表单里面的input【submit】来提交
+<form id="test">
+  <input type="text" >
+  <input type="submit">
+</form>
+<input type="text" form="test">
+list
+  <input type="text" list="abc">
+  <datalist id="abc">
+    <option value="123">123</option>
+    <option value="124">124</option>
+    <option value="125">125</option>
+  </datalist>
+multiple 实现多选效果
+placeholder 占位符（提示信息）
+required 必填项
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div{width: 100px;height: 100px;background: red;}
+    .on{background: green;}
+  </style>
+</head>
+<body>
+  <div></div>
+  <input type="submit" class="add" value="添加">
+  <input type="submit" class="remove" value="移除">
+  <input type="submit" class="contains" value="检测是否包含">
+  <input type="submit" class="toggle" value="切换类">
+</body>
+<script>
+  var cyDiv = document.querySelector('div')
+  //通过js选中对应的按钮
+  var cyAdd = document.querySelector('.add')
+  var cyRemove = document.querySelector('.remove')
+  var cyContains = document.querySelector('.contains')
+  var cyToggle = document.querySelector('.toggle')
+
+  //添加
+  cyAdd.onclick = function(){
+    cyDiv.classList.add('on')
+  }
+  //移除
+  cyRemove.onclick = function(){
+    cyDiv.classList.remove('on')
+  }
+  //检测是否包含
+  cyContains.onclick = function(){
+    cyDiv.classList.contains('on')
+  }
+  //切换类
+  cyToggle.onclick = function(){
+    cyDiv.classList.toggle('on')
+  }
+ 
+</script>
+</html>

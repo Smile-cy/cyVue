@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="one" data-text="123"></div>
+  <div class="two" data-text-name="456"></div>
+</body>
+<script>
+  //获取标签的自定义属性值
+  var listone = document.querySelector('.one');
+  var listtwo = document.querySelector('.two');
+  // console.log(listone.dataset);
+  console.log(listone.dataset.text)
+  console.log(listtwo.dataset.textName)
+
+  // 设置自定义属性
+  listtwo.dataset.age = 20;
+  listone.dataset.testHeight = 180;
+
+  
+</script>
+</html>

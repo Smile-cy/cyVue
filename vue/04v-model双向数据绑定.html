@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="appYL"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    template:`
+      <div>
+        <input type="text" v-model="msg" />
+        <div>{{msg}}</div>
+      </div>
+    `,
+    data(){
+      return{
+        msg:'hello双向绑定'
+      }
+    }
+  })
+
+  new Vue({
+    el:'#appYL',
+    template:`
+      <div>
+        <input type="text" v-bind:value = "msg" v-on:input="change"/>
+        <div>{{msg}}</div>
+      </div>
+    `,
+    data(){
+      return{
+        msg:'努力学习，只有学习好你才能得到别人的zc'
+      }
+    },
+    methods: {
+      change(e){
+        console.log(e.target.value)
+        this.msg=e.target.value
+      }
+    },
+  })
+
+</script>
+
+</html>

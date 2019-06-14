@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{padding: 0;margin: 0;}
+    .wrapper{width: 100%}
+    .head{width: 1000px;height: 80px;border: 1px solid #000;margin: 0 auto;text-align: center;}
+    .main{width: 1000px;margin: 0 auto;overflow: hidden;}
+    .aside{float: left; width: 190px;height: 300px;border: 1px solid #000;}
+    .content{float: right; width: 790px;height: 300px;border: 1px solid #000;}
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+// 父组件传子组件
+// 1.在父组件中，先绑定：自定义的属性的名字 = posts
+// 2.子要声明props:['自定义的属性名']来接受
+// 3.收到啦就是自己的，你可以任意使用
+
+  //全局组件
+    //第一个参数是组件的名字，第二个参数是options【这个相当于声明跟挂载一起】
+    Vue.component('Vbtn',{
+      template:`
+        <button>按钮</button>
+      `
+    });
+
+  //局部组件：声子  挂子   用子
+    var Vheader  =  {
+      template:`<div class="head">我是头部组件<Vbtn/></div>`
+    }
+
+    var Vaside =  {
+      template:`<div class="aside">我是侧边栏组件<Vbtn/></div>`
+    } 
+
+    var Vcontent =  {
+      template:`
+      <div class="content">
+        我是内容组件
+        <Vbtn/>
+        <ul>
+          <li v-for='(item,index) in boke'>
+              <h3>{{item.id}}</h3>
+              <h4>{{item.title}}</h4>
+              <p>{{item.content}}</p>
+          </li>
+        </ul>
+      </div>
+      `,
+      props:['boke']
+    }
+  //1.创建局部组件先得----声明局部组件【首字母大写】   app就是个入口组件
+  var App = {
+      template:`
+      <div class="wrapper">
+        <Vheader />
+        <div class="main">
+            <Vaside />
+            <Vcontent :boke="poke" />
+        </div>
+      </div>
+      `,
+      data(){
+        return{
+          poke:[
+            {id:1,title:"我的第一天博客",content:"天王该地虎"},
+            {id:2,title:"我的第二天博客",content:"小鸡炖蘑菇"},
+            {id:3,title:"我的第三天博客",content:"宝塔镇河妖"}
+          ]
+        }
+      },
+      components:{
+        Vheader,
+        Vaside,
+        Vcontent
+      }
+  }
+  new Vue({
+    el:"#app",
+    template:`<App></App>`,
+    data(){
+      return {
+        
+      }
+    },
+    //2.挂载组件
+    components:{
+      App
+    }
+  })
+</script>
+</html>

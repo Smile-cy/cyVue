@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <!-- 1.先引入vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 2.引包 引入核心的插件vue-router -->
+<script src="node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 声明式导航 -->
+    <router-link to="/home">首页</router-link>
+    <router-link to="/blog">我的博客</router-link>
+    <router-link to="/login">登录</router-link>
+    <a href="javascript:void(0);" @click = 'clear'>退出</a>
+    <router-view></router-view>
+    
+    
+  </div>
+</body>
+
+<script>
+  // 让vue使用该vueRouter创建 
+  Vue.use(VueRouter);
+
+  // 创建组件
+  var Home = {
+    template:`<div>我是首页</div>`
+  };
+  var Blog = {
+    template:`<div>我是博客</div>`
+  };
+  var Login = {
+    data(){
+      return{
+        name:'',
+        pwd:''
+      }
+    },
+    template:`
+    <div>
+      <input type="text" v-model="name"/>
+      <input type="text" v-model="pwd"/>
+      <input type="button" value="登陆" @click = "login"/>
+    </div>
+    `,
+    methods: {
+      login(){
+        localStorage.setItem('user',{name:this.name,pwd:this.pwd});
+        //编程式导航
+        this.$router.push({name:'blog'})
+      
+      }
+    },
+
+  };
+
+  // 创建路由对象
+  var router = new VueRouter({
+    // 配置路由对象
+    routes:[
+      // 路由匹配规则
+        //重定向
+      {
+        path:'/',
+        redirect:'/home'
+      },
+      {
+        path:'/home',
+        component:Home
+      },
+      {
+        path:'/blog',
+        name:'blog',
+        component:Blog,
+        // 给未来路由  做权限控制 全局路由守卫来做参考条件
+        meta:{
+          //表示用户访问该组件的时候需要登陆
+          auth:true
+        }
+      },
+      {
+        path:'/login',
+        component:Login,
+
+      }
+    ]
+  });
+
+  router.beforeEach((to,from,next) => {
+    console.log(to);
+    console.log(from);
+    if(to.meta.auth){
+      //用户点击了博客链接，该用户未登陆  需要登陆判断准备跳转登陆页面
+      if(localStorage.getItem('user')){
+        //不为空，
+        next();
+      }else{
+        //用户需要登陆
+        next({
+          path:'/login'
+        })
+      }
+    }else{
+      next(); //如果不调用next就会卡住
+    }
+    
+  })
+
+  new Vue({
+    el:'#app',
+    router,
+    methods:{
+      clear(){
+        localStorage.removeItem('user');
+        this.$router.push('/login');
+      }
+    }
+
+  })
+</script>
+</html>
